@@ -1,0 +1,21 @@
+div {
+  color: red;
+  /* background: gray; */
+}
+
+div:hover {
+  animation: move ease 1.5s;
+}
+
+@keyframes move {
+  0% {
+    color: yellow;
+  }
+  50% {
+    color: yellowgreen;
+
+  }
+  100% {
+    color: green;
+  }
+}
