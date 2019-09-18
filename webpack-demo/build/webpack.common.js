@@ -1,16 +1,20 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const config = require("./config");
+const util = require("./util");
+const entries = util.entries();
+
+// console.log('-----------'+entries.entries)
+// console.log(entries)
+// console.log(entries.entries)
 
 module.exports = {
   context: path.resolve(__dirname, './'),
-  entry: {
-    index: "./src/html/index/js/index.js",
-    about: "./src/html/about/js/about.js",
-  },
+  entry: entries.entries,
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "./dist")
+    path: path.resolve(__dirname, config.path.dist)
   },
   resolve: {
     extensions: ['.js', '.scss', '.css', '.less']
@@ -46,16 +50,19 @@ module.exports = {
   plugins: [
     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, './src/html/index.html'),
-      // title: "Production"
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'about.html',
-      template: path.resolve(__dirname, './src/html/about.html'),
-      // title: "Production"
-    })
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: path.resolve(__dirname, '../src/html/index.html'),
+    //   // title: "Production"
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'about.html',
+    //   template: path.resolve(__dirname, '../src/html/about.html'),
+    //   // title: "Production"
+    // })
+
+    // html输出
+    ...entries.htmlPlugins
   ],
   // optimization: {
   //   moduleIds: "hashed",
